@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="logging" class="com.github.pukkaone.gelf.logback.GelfAppender">
+        <graylogHost>172.17.0.40</graylogHost>
+        <originHost>tools</originHost>  <!--source,来源-->
+        <levelIncluded>true</levelIncluded>
+        <locationIncluded>false</locationIncluded>
+        <loggerIncluded>true</loggerIncluded>
+        <markerIncluded>false</markerIncluded>
+        <mdcIncluded>false</mdcIncluded>
+        <threadIncluded>false</threadIncluded>
+        <facility>docker-java</facility> <!--facility，随便写呗-->
+        <additionalField>application=graylogdemo</additionalField> <!--application，应用-->
+        <additionalField>environment=prod</additionalField> <!--environment，环境-->
+        <additionalField>managername=Ralph</additionalField> <!--我自己加的managername，环境-->
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="logging" />
+    </root>
+</configuration>
